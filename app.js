@@ -3,7 +3,7 @@ const express = require('express');
 const app = express();
 
 app.get('/hello', (req, res) => {
-	res.status(200).send(123);
+	res.sendStatus(204);
 });
 
 const runServer = async (portNumber) => {

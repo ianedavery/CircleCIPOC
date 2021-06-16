@@ -12,18 +12,21 @@ const {
 
 describe('circle ci poc', () => {
 	before(() => {
-		return runServer();
+		return runServer(3000);
 	});
 	after(() => {
 		return closeServer();
 	});
 	describe('GET endpoint', () => {
-		it('should return a string', (done) => {
-			chai.request(app)
+		it('should return a string', () => {
+			let res;
+			return chai.request(app)
 				.get('/hello')
-				.end((err, res) => {
+				.then(_res => {
+					res = _res;
 					res.should.have.status(200);
-					done();
+					res.body.should.be.a('object');
+					res.body.should.have.property('message').eql('hello world');
 				});
 		});
 	});

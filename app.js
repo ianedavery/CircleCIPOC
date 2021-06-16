@@ -12,6 +12,10 @@ app.get('/hello', (req, res) => {
 	return res.status(200).json({ message: 'hello world' });
 });
 
+app.get('/bye', (req, res) => {
+	return res.status(200).json({ message: 'goodbye cruel world'});
+});
+
 const runServer = async (portNumber) => {
 	try {
 		server = app.listen(portNumber, () => {

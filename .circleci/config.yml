@@ -39,19 +39,13 @@ jobs:
           name: Deploy Over SSH
           command: ssh iana@10.3.0.4 'cd /home/iana/CircleCIPOC && git checkout main && git pull && docker stop circle_ci_poc && docker rm circle_ci_poc && docker image rm circle_ci_poc && docker build -t circle_ci_poc . && docker run -d -p 3001:3001 --restart unless-stopped --name circle_ci_poc circle_ci_poc'
 
-workflows:
-  # Below is the definition of your workflow.
-  # Inside the workflow, you provide the jobs you want to run, e.g this workflow runs the build-and-test job above.
-  # CircleCI will run this workflow on every commit.
-  # For more details on extending your workflow, see the configuration docs: https://circleci.com/docs/2.0/configuration-reference/#workflows
-  build-and-deploy: 
-    jobs:
-      - build
-      # For running simple node tests, you could optionally use the node/test job from the orb to replicate and replace the job above in fewer lines.
-      # - node/test
-      - deploy:
-        requires:
-          - build
-        filters:
-          branches:
-            only: main
+ workflows:
+   build-and-deploy:
+     jobs:
+       - build
+       - deploy:
+           requires:
+             - build # only deploy once build job has completed
+           filters:
+             branches:
+               only: main # only deploy on the master branch

@@ -35,6 +35,9 @@ jobs:
     machine:
       enabled: true
     steps:
+      - add_ssh_keys:
+          fingerprints:
+              - "80:a2:d9:fc:c3:23:1a:69:09:d4:5f:3f:14:8c:35:69"
       - run:
           name: Deploy Over SSH
           command: ssh iana@10.3.0.4 'cd /home/iana/CircleCIPOC && git checkout main && git pull && docker stop circle_ci_poc && docker rm circle_ci_poc && docker image rm circle_ci_poc && docker build -t circle_ci_poc . && docker run -d -p 3001:3001 --restart unless-stopped --name circle_ci_poc circle_ci_poc'

@@ -13,7 +13,7 @@ app.get('/hello', (req, res) => {
 });
 
 app.get('/bye', (req, res) => {
-	return res.status(200).json({ message: 'goodbye cruel world'});
+	return res.status(200).json({ message: 'goodbye world'});
 });
 
 const runServer = async (portNumber) => {

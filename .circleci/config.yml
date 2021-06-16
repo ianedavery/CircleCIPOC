@@ -31,13 +31,13 @@ jobs:
       - run:
           name: Run tests
           command: npm test
-  deploy:
-    machine:
-      enabled: true
-    steps:
-      - run:
-        name: Deploy Over SSH
-        command: ssh iana@10.3.0.4 'cd /home/iana/CircleCIPOC && git checkout main && git pull && docker stop circle_ci_poc && docker rm circle_ci_poc && docker image rm circle_ci_poc && docker build -t circle_ci_poc . && docker run -d -p 3001:3001 --restart unless-stopped --name circle_ci_poc circle_ci_poc'
+  # deploy:
+  #   machine:
+  #     enabled: true
+  #   steps:
+  #     - run:
+  #       name: Deploy Over SSH
+        # command: ssh iana@10.3.0.4 'cd /home/iana/CircleCIPOC && git checkout main && git pull && docker stop circle_ci_poc && docker rm circle_ci_poc && docker image rm circle_ci_poc && docker build -t circle_ci_poc . && docker run -d -p 3001:3001 --restart unless-stopped --name circle_ci_poc circle_ci_poc'
 
 workflows:
   # Below is the definition of your workflow.

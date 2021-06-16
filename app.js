@@ -32,7 +32,7 @@ const closeServer = () => {
 
 if (require.main === module) {
 	try {
-		runServer(3000);
+		runServer(3001);
 	} catch (error) {
 		console.error(error);
 	}
